@@ -1,12 +1,8 @@
 import WasmTerminal from "@wasmer/wasm-terminal";
-import { WASI, WASIContext, WASIWorkerHost } from "../runno/packages/wasi-motor";
-// import WasmTerminal from "@runno/terminal"
-// import { WASI } from '@wasmer/wasi';
-// import browserBindings from '@wasmer/wasi/lib/bindings/browser';
+import { WASIWorkerHost } from "../runno/packages/wasi-motor";
 import { Terminal } from "xterm";
 import React, { useEffect } from "react";
 import './App.css'
-// import SharedArrayBuffer from "typescript";
 
 function App() {
   const fetchCommandHandler = async ({ args }) => {
@@ -59,8 +55,6 @@ function App() {
 
       view.setInt32(0, encodedText.byteLength);
 
-      console.log("going to notify");
-
       Atomics.notify(new Int32Array(stdinBuffer), 0);
     });
 
@@ -79,33 +73,15 @@ function App() {
 
     });
 
-    // terminal.onKey = ({ domEvent }) => {
-    //   console.log("what the fuck");
-    // }
-
     terminal.open(document.getElementById("terminal"));
-
-    // const context = new WASIContext({
-    //   args: ["datafusion-cli"],
-    //   env: {},
-    //   stdout: (out) => terminal.write(out),
-    //   stderr: (err) => terminal.write(err),
-    //   stdin: () => prompt("stdin:"),
-    //   fs: {},
-    // });
-
-    const workerHost = new WASIWorkerHost("http://localho.st:8080/datafusion-cli.wasm", stdinBuffer, {
+    const workerHost = new WASIWorkerHost("https://static-dispatch.s3.ap-northeast-1.amazonaws.com/datafusion-cli.wasm", stdinBuffer, {
       args: ["datafusion-cli"],
       env: {},
       stdout: (out) => terminal.write(out),
-      // stdout: (out) => console.log(out),
       stderr: (err) => terminal.write(err), // TODO: Different colour?
       fs: {},
     });
     const result = workerHost.start().then(() => { console.log("Exit"); terminal.write("Exit"); });
-
-    // const result = WASI.start(fetch("./datafusion-cli.wasm"), context);
-
   });
 
   return (
@@ -114,25 +90,18 @@ function App() {
       <link
         rel="stylesheet"
         type="text/css"
-        // href="./node_modules/@wasmer/wasm-terminal/lib/xterm/xterm.css"
         href="./node_modules/xterm/css/xterm.css"
       />
 
       <div className="min-h-full">
-        <header className="bg-white shadow">
+        <header className="bg-white shadow text-5xl">
           <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">DataFusion Playground</h1>
+            <h1 className="text-5xl font-bold tracking-tight text-gray-900">DataFusion Playground</h1>
           </div>
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            {/* Replace with your content */}
-            {/* <div className="px-4 py-6 sm:px-0">
-              <div className="h-96 rounded-lg border-4 border-dashed border-gray-200"> */}
             <div className="wasm-terminal" id="terminal"></div>
-            {/* </div>
-            </div> */}
-            {/* /End replace */}
           </div>
         </main>
       </div>
