@@ -4,3 +4,4 @@
 [submodule "arrow-datafusion"]
 	path = arrow-datafusion
 	url = https://github.com/waynexia/arrow-datafusion.git
+	branch = cli-wasm
