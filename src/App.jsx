@@ -99,6 +99,11 @@ function App() {
             <h1 className="text-5xl font-bold tracking-tight text-gray-900">DataFusion Playground</h1>
           </div>
         </header>
+        <div className="explain">
+          <p>Playground of <a href="www.google.com">Apache Arrow DataFusion</a>. In a early experimental stage as my side project.</p>
+          <p>It might take a while to load the wasm file. I don't find a appropriate CDN for it. You'll see "starting!" when it's ready.</p>
+          <p>Known bug: backspace doesn't work, and error message won't display.</p>
+        </div>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <div className="wasm-terminal" id="terminal"></div>
