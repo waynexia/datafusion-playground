@@ -97,7 +97,7 @@ function App() {
           </div>
         </header>
         <div className="explain">
-          <p>Playground of <a href="www.google.com">Apache Arrow DataFusion</a>. In a early experimental stage as my side project.</p>
+          <p>Playground of <a href="https://github.com/apache/arrow-datafusion">Apache Arrow DataFusion</a>. In the early experimental stage as <a href="https://github.com/waynexia/datafusion-playground">my side project.</a></p>
           <p>It might take a while to load the wasm file. I don't find a appropriate CDN for it. You'll see "starting!" when it's ready.</p>
           <p>Known bug: backspace doesn't work, and error message won't display.</p>
         </div>
