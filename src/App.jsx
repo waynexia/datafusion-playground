@@ -92,6 +92,7 @@ function App() {
         type="text/css"
         href="./node_modules/xterm/css/xterm.css"
       />
+      <script data-goatcounter="https://waynest.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
       <div className="min-h-full">
         <header className="bg-white shadow text-5xl">
