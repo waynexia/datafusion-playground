@@ -17,4 +17,5 @@ const crossOriginPolicy = {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), crossOriginPolicy],
+  base: '/datafusion-playground/'
 })

@@ -29,6 +29,10 @@ jobs:
           npm run build
       - name: Build project
         run: npm run build
+      - name: Inject COI-Worker script
+        run: |
+          wget "https://cdn.jsdelivr.net/gh/gzuidhof/coi-serviceworker@master/coi-serviceworker.min.js" -o dist/coi-serviceworker.min.js
+          ls dist
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
         with:
