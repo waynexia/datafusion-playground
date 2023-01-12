@@ -87,7 +87,7 @@ function App() {
   return (
     <>
       {/* <!-- This includes the external stylesheet. NOTE: The path should point to wherever you are hosting the wasm-terminal output. --> */}
-      <link rel="stylesheet" href="node_modules/xterm/css/xterm.css" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/xtermjs/xterm.js@5.1.0/css/xterm.css" />
       <script data-goatcounter="https://waynest.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
       <div className="min-h-full">
