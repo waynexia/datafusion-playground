@@ -1,9 +1,35 @@
 import { useState } from 'react'
 import './App.css'
 import React from 'react'
+import * as datafusion_wasm from 'datafusion-wasm'
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [exec_result, setExecResult] = useState('starting!')
+  const [inputValue, setInputValue] = useState('');
+
+  console.log(datafusion_wasm)
+  console.log(datafusion_wasm.DataFusionContext.greet())
+  const df_ctx = datafusion_wasm.DataFusionContext.new()
+  console.log(df_ctx)
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const sql = inputValue;
+    console.log("executing " + sql)
+    const result = df_ctx.execute_sql(sql)
+    result.then((r) => {
+      setExecResult(r)
+      setInputValue('');
+    })
+
+  };
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
   return (
     <>
@@ -20,8 +46,16 @@ function App() {
         </div>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <div className="wasm-terminal" id="terminal"></div>
+            Execute Result:
+            <pre>
+              {exec_result}
+            </pre>
           </div>
+
+          <form onSubmit={handleSubmit}>
+            <input type="text" value={inputValue} onChange={handleChange} />
+            <button type="submit">Execute</button>
+          </form>
         </main>
       </div>
     </>
