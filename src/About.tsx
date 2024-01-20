@@ -12,7 +12,7 @@ export function About() {
         </header>
         <div className="explain">
           <p>Playground of <a href="https://github.com/apache/arrow-datafusion">Apache Arrow DataFusion</a>. In the early experimental stage as <a href="https://github.com/waynexia/datafusion-playground">my side project.</a></p>
-          <p>It might take a while to load the wasm file.</p>
+          <p className='c-gray'>It might take a while to load the wasm file.</p>
         </div>
       </div >
     </>

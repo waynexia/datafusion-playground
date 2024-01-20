@@ -2,19 +2,19 @@ import { useState } from 'react'
 import './App.css'
 import * as datafusion_wasm from 'datafusion-wasm'
 import { About } from './About.tsx'
+import { ActionIcon, Textarea, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
 
 function App() {
   const [exec_result, setExecResult] = useState('starting!')
+  const [sql, setSql] = useState('')
 
-  console.log(datafusion_wasm)
   console.log(datafusion_wasm.DataFusionContext.greet())
   const df_ctx = datafusion_wasm.DataFusionContext.new()
-  console.log(df_ctx)
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const sql = e.target[0].value;
     console.log("executing " + sql)
     const result = df_ctx.execute_sql(sql)
     result.then((r) => {
@@ -22,8 +22,12 @@ function App() {
     })
   };
 
+  const handleChange = (e) => {
+    setSql(e.currentTarget.value)
+  }
+
   return (
-    <>
+    <MantineProvider>
       <main className="h-100vh w-100vw">
         <div className="sidebar">
           <About />
@@ -38,13 +42,23 @@ function App() {
         </div>
 
         <div className="input-area">
-          <form onSubmit={handleSubmit}>
-            <button type="submit">Run</button>
-            <textarea className='w90% h100%' />
-          </form>
+          <Textarea
+            size="md"
+            radius="m"
+            minRows={5}
+            autosize={true}
+            description=""
+            placeholder="SQL here"
+            onChange={handleChange}
+            rightSection={
+              <ActionIcon size={32} radius="xl" variant="filled" onClick={handleSubmit} >
+                <div className='i-tabler-run' />
+              </ActionIcon>
+            }
+          />
         </div>
       </main>
-    </>
+    </MantineProvider>
   )
 }
 
