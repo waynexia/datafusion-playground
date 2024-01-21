@@ -1,13 +1,16 @@
-import { useState } from 'react'
 import './App.css'
 import * as datafusion_wasm from 'datafusion-wasm'
 import { About } from './About.tsx'
 import { ActionIcon, Textarea, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
+import { atom, useAtom } from 'jotai'
+
+const sqlAtom = atom('')
+const execResultAtom = atom('DataFusion Playground is initialized!')
 
 function App() {
-  const [exec_result, setExecResult] = useState('starting!')
-  const [sql, setSql] = useState('')
+  const [execResult, setExecResult] = useAtom(execResultAtom)
+  const [sql, setSql] = useAtom(sqlAtom)
 
   console.log(datafusion_wasm.DataFusionContext.greet())
   const df_ctx = datafusion_wasm.DataFusionContext.new()
@@ -36,7 +39,7 @@ function App() {
           <div className="py-6">
             Execute Result:
             <pre>
-              {exec_result}
+              {execResult}
             </pre>
           </div>
         </div>
