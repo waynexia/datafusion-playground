@@ -1,6 +1,6 @@
 import './App.css'
 import * as datafusion_wasm from 'datafusion-wasm'
-import { About } from './About.tsx'
+import { About } from './components/About.tsx'
 import { ActionIcon, Textarea, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { atom, useAtom } from 'jotai'
