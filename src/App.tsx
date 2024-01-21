@@ -1,34 +1,15 @@
 import './App.css'
 import * as datafusion_wasm from 'datafusion-wasm'
 import { About } from './components/About.tsx'
-import { ActionIcon, Textarea, MantineProvider } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
-import { atom, useAtom } from 'jotai'
+import { History } from './components/History.tsx';
+import { InputArea } from './components/InputArea.tsx';
 
-const sqlAtom = atom('')
-const execResultAtom = atom('DataFusion Playground is initialized!')
+console.log(datafusion_wasm.DataFusionContext.greet())
+export const dfCtx = datafusion_wasm.DataFusionContext.new()
 
 function App() {
-  const [execResult, setExecResult] = useAtom(execResultAtom)
-  const [sql, setSql] = useAtom(sqlAtom)
-
-  console.log(datafusion_wasm.DataFusionContext.greet())
-  const df_ctx = datafusion_wasm.DataFusionContext.new()
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log("executing " + sql)
-    const result = df_ctx.execute_sql(sql)
-    result.then((r) => {
-      setExecResult(r)
-    })
-  };
-
-  const handleChange = (e) => {
-    setSql(e.currentTarget.value)
-  }
-
   return (
     <MantineProvider>
       <main className="h-100vh w-100vw">
@@ -36,29 +17,11 @@ function App() {
           <About />
         </div>
         <div className="history">
-          <div className="py-6">
-            Execute Result:
-            <pre>
-              {execResult}
-            </pre>
-          </div>
+          <History />
         </div>
 
         <div className="input-area">
-          <Textarea
-            size="md"
-            radius="m"
-            minRows={5}
-            autosize={true}
-            description=""
-            placeholder="SQL here"
-            onChange={handleChange}
-            rightSection={
-              <ActionIcon size={32} radius="xl" variant="filled" onClick={handleSubmit} >
-                <div className='i-tabler-run' />
-              </ActionIcon>
-            }
-          />
+          <InputArea />
         </div>
       </main>
     </MantineProvider>
