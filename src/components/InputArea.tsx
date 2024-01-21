@@ -31,6 +31,7 @@ export function InputArea() {
 
   return (
     < Textarea
+      className="m-4"
       size="md"
       radius="m"
       minRows={5}

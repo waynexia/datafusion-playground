@@ -6,7 +6,7 @@ export function History() {
   const execResult = useAtomValue(execResultAtom)
 
   return (
-    <div className="py-6">
+    <div className="py-6 m4">
       Execute Result:
       <pre>
         {execResult}
