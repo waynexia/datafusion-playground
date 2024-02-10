@@ -12,7 +12,7 @@ export const dfCtx = datafusion_wasm.DataFusionContext.new()
 function App() {
   return (
     <MantineProvider>
-      <main className="h-100vh w-100vw">
+      <main className="h-svh w-screen">
         <div className="sidebar">
           <Sidebar />
         </div>

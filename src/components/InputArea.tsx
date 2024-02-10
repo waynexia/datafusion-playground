@@ -1,13 +1,12 @@
 import { Textarea } from "@mantine/core"
 import { atom, useAtom, useSetAtom } from "jotai"
-import { execResultAtom } from "./History"
+import { historyListAtom, } from "./History"
 import { dfCtx } from "../App"
 
 export const sqlAtom = atom('')
 
 export function InputArea() {
   const [sql, setSql] = useAtom(sqlAtom)
-  const setExecResult = useSetAtom(execResultAtom)
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSql(e.currentTarget.value)
@@ -24,7 +23,8 @@ export function InputArea() {
   const doQuery = () => {
     const result = dfCtx.execute_sql(sql)
     result.then((r) => {
-      setExecResult(r)
+      const setHistoryList = useSetAtom(historyListAtom)
+      setHistoryList((history) => [...history, { query: sql, result: r, isErr: false }])
     })
     console.log('doQuery' + sql)
   }
@@ -34,7 +34,7 @@ export function InputArea() {
       className="m-4"
       size="md"
       radius="m"
-      minRows={5}
+      minRows={4}
       maxRows={7}
       autosize={true}
       description="Cmd + Enter to execute"

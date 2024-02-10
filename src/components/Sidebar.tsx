@@ -7,10 +7,10 @@ import { About } from "./About";
 // - active tab acon is not blue
 
 const mainTabData = [
-  { icon: "i-tabler-run", label: 'About' },
-  { icon: "i-tabler-run", label: 'Dashboard' },
-  { icon: "i-tabler-run", label: 'Analytics' },
-  { icon: "i-tabler-run", label: 'Settings' },
+  { icon: "i-tabler-info-circle", label: 'About' },
+  { icon: "i-tabler-cloud-share", label: 'Cloud' },
+  { icon: "i-tabler-file-upload", label: 'Upload' },
+  { icon: "i-tabler-settings", label: 'Settings' },
 ];
 
 const activeTabAtom = atom("Home")
@@ -50,7 +50,7 @@ export function Sidebar() {
       <div className="flex flex-auto">
         <div className="flex-initial bg-white flex flex-col flex-items-center border-r-solid border-r-gray border-r-1">
           <div className="w-full flex flex-justify-center h-30px border-b-solid border-b-gray-3 border-b-1">
-            <div className="i-tabler-run size-7" />
+            <div className="i-tabler-arrow-badge-right-filled size-7" />
           </div>
           {mainTabs}
         </div>
