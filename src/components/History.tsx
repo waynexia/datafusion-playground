@@ -13,10 +13,13 @@ export const historyListAtom = atom([initialGreeting])
 
 function HistoryItem(executeHistory: ExecuteHistory) {
   return (
-    <div className="py-1 m4 position-relative group hover:border-solid hover:border-1 hover:border-rd hover:border-gray">
+    <div className="py-1 m4 position-relative group border-solid border-1 border-rd border-transparent hover:border-gray">
       <div className="hidden group-hover-display-unset">
         <Tooltip label="Copy Result">
-          <ActionIcon className="position-absolute top-4 right-4" variant="outline" color="gray">
+          <ActionIcon
+            className="position-absolute top-4 right-4"
+            variant="outline" color="gray"
+            onClick={() => { navigator.clipboard.writeText(executeHistory.result) }}>
             <div className="i-tabler-copy" />
           </ActionIcon>
         </Tooltip>
