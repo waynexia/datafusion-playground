@@ -7,6 +7,7 @@ export const sqlAtom = atom('')
 
 export function InputArea() {
   const [sql, setSql] = useAtom(sqlAtom)
+  const setHistoryList = useSetAtom(historyListAtom)
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSql(e.currentTarget.value)
@@ -23,8 +24,7 @@ export function InputArea() {
   const doQuery = () => {
     const result = dfCtx.execute_sql(sql)
     result.then((r) => {
-      const setHistoryList = useSetAtom(historyListAtom)
-      setHistoryList((history) => [...history, { query: sql, result: r, isErr: false }])
+      setHistoryList((history) => [{ query: sql, result: r, isErr: false }, ...history])
     })
     console.log('doQuery' + sql)
   }
