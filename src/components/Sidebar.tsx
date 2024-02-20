@@ -13,7 +13,7 @@ const mainTabData = [
   { icon: "i-tabler-settings", label: 'Settings' },
 ];
 
-const activeTabAtom = atom("Home")
+const activeTabAtom = atom("About")
 
 function switchTab() {
   const activeTab = useAtomValue(activeTabAtom)

@@ -11,21 +11,36 @@ class ExecuteHistory {
 
 export const historyListAtom = atom([initialGreeting])
 
+const actions = [
+  { tip: "Copy Result", icon: "i-tabler-copy", action: (executeHistory: ExecuteHistory) => { navigator.clipboard.writeText(executeHistory.result) } },
+  { tip: "Copy Query", icon: "i-tabler-arrow-left-to-arc", action: (executeHistory: ExecuteHistory) => { navigator.clipboard.writeText(executeHistory.query) } },
+]
+
 function HistoryItem(executeHistory: ExecuteHistory) {
   return (
-    <div className="py-1 m1 position-relative group border-solid border-1 border-rd border-transparent hover:border-gray">
-      <div className="hidden group-hover-display-unset">
-        <Tooltip label="Copy Result">
-          <ActionIcon
-            className="position-absolute top-4 right-4"
-            variant="outline" color="gray"
-            onClick={() => { navigator.clipboard.writeText(executeHistory.result) }}>
-            <div className="i-tabler-copy" />
-          </ActionIcon>
-        </Tooltip>
-      </div>
+    <div className={executeHistory.isErr ? "bg-red-200" : ""}>
+      <div className="py-1 m1 position-relative group border-solid border-1 border-rd border-transparent hover:border-gray">
+        <div className="hidden group-hover-display-unset">
+          {
+            actions.map((action, index) => (
+              <Tooltip key={index} label={action.tip}>
+                <ActionIcon
+                  className={"position-absolute top-4 right-" + (index * 8 + 4)}
+                  variant="outline"
+                  color="gray"
+                  onClick={() => { action.action(executeHistory) }}>
+                  <div className={action.icon} />
+                </ActionIcon>
+              </Tooltip>)
+            )
+          }
+        </div>
 
-      <pre>{executeHistory.result}</pre>
+        <div className="break-words whitespace-pre-line">
+          <pre className={"whitespace-pre-wrap " + (executeHistory.isErr ? "text-red-600" : "text-gray")}>{executeHistory.query}</pre>
+          <pre className="whitespace-pre-wrap">{executeHistory.result}</pre>
+        </div>
+      </div>
     </div>
   )
 }

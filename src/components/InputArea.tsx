@@ -13,8 +13,8 @@ export function InputArea() {
     setSql(e.currentTarget.value)
   }
 
-  const handleCmdEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && e.metaKey) {
+  const handleCtrlEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && e.ctrlKey) {
       doQuery();
 
       e.currentTarget.value = ''
@@ -23,8 +23,10 @@ export function InputArea() {
 
   const doQuery = () => {
     const result = dfCtx.execute_sql(sql)
-    result.then((r) => {
+    result.then((r: string) => {
       setHistoryList((history) => [{ query: sql, result: r, isErr: false }, ...history])
+    }).catch((e: string) => {
+      setHistoryList((history) => [{ query: sql, result: e, isErr: true }, ...history])
     })
     console.log('doQuery' + sql)
   }
@@ -37,9 +39,9 @@ export function InputArea() {
       minRows={4}
       maxRows={7}
       autosize={true}
-      description="Cmd + Enter to execute"
+      description="Ctrl + Enter to execute"
       placeholder="SQL here"
       onChange={handleChange}
-      onKeyDown={handleCmdEnter}
+      onKeyDown={handleCtrlEnter}
     />)
 }
