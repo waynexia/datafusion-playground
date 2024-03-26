@@ -1,6 +1,7 @@
 import { Title, Tooltip, UnstyledButton, rem } from "@mantine/core";
 import { atom, useAtom, useAtomValue } from "jotai";
 import { About } from "./About";
+import { CloudConfig } from "./CloudConfig";
 
 // unresolved problem:
 // - icon is not rounded
@@ -19,6 +20,7 @@ function switchTab() {
   const activeTab = useAtomValue(activeTabAtom)
   switch (activeTab) {
     case "About": return <About />
+    case "Cloud": return <CloudConfig />
     default: return <div>Empty Tab</div>
   }
 }

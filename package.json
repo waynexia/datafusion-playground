@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@mantine/core": "^7.4.2",
+    "datafusion-wasm": "^0.2.0",
     "jotai": "^2.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
