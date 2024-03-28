@@ -12,8 +12,8 @@ class ExecuteHistory {
 export const historyListAtom = atom([initialGreeting])
 
 const actions = [
-  { tip: "Delete", icon: "i-tabler-trash", action: () => { } },
-  { tip: "Collapse", icon: "i-tabler-box-align-top", action: () => { } },
+  // { tip: "Delete", icon: "i-tabler-trash", action: () => { } },
+  // { tip: "Collapse", icon: "i-tabler-box-align-top", action: () => { } },
   { tip: "Copy Query", icon: "i-tabler-arrow-left-to-arc", action: (executeHistory: ExecuteHistory) => { navigator.clipboard.writeText(executeHistory.query) } },
   { tip: "Copy Result", icon: "i-tabler-copy", action: (executeHistory: ExecuteHistory) => { navigator.clipboard.writeText(executeHistory.result) } },
 ]
