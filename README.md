@@ -10,6 +10,27 @@ Playground of [Apache Arrow DataFusion](https://github.com/apache/arrow-datafusi
 
 🌱 Live Demo: https://waynexia.github.io/datafusion-playground/
 
-Known bugs:
-- backspace doesn't work
-- error message won't display
+## Features
+
+- Cloud storage support: HTTP, AWS S3 (Google Cloud Storage and Azure Blob Storage are on the way)
+- Full functional DataFusion query engine.
+- Data formats: CSV, Parquet, JSON, Avro
+
+## Screenshot
+
+![Screenshot](./src/assets/datafusion-playground-demo.png)
+
+## Examples
+
+Create an external table from S3 parquet file:
+
+```sql
+CREATE EXTERNAL TABLE test STORED AS PARQUET
+LOCATION 's3://path-to-your.parquet';
+```
+
+Explain a query:
+
+```sql
+EXPLAIN SELECT MIN(airport_fee), MAX(airport_fee) FROM test;
+```
